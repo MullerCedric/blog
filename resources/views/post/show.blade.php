@@ -33,11 +33,62 @@
             <form action="/posts/{{$post->id}}" method="POST">
                 @csrf
                 @method('DELETE')
-                <label>
-                    <p>Supprimer cet article</p>
-                    <button class="btn btn-danger">Supprimer</button>
-                </label>
+                <div class="form-group">
+                    <label class="sr-only" for="delete">
+                        Supprimer cet article
+                    </label>
+                    <button class="btn btn-danger" id="delete">Supprimer</button>
+                </div>
             </form>
         @endcan
+        <section>
+            <h2>Commentaires</h2>
+            @if($comments && !$comments->isEmpty())
+                <ul class="list-group list-group-flush">
+                    @foreach($comments as $key => $comment)
+                        <li class="list-group-item">
+                            <p>Commentaire par {{$comment->author->name}}</p>
+                            {{$comment->content}}
+
+                            @can('delete', $comment)
+                                <form action="/comments/{{$comment->id}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <label class="sr-only" for="delete-comment-{{$key}}">
+                                        Supprimer ce commentaire
+                                    </label>
+                                    <button class="btn btn-sm btn-danger" id="delete-comment-{{$key}}">
+                                        Supprimer
+                                    </button>
+                                </form>
+                            @endcan
+                        </li>
+                    @endforeach
+                </ul>
+            @else
+                <p>Aucun commentaire sur cet article actuellement</p>
+                @auth
+                    <hr>
+                @endauth
+            @endif
+            @auth
+                <form action="{{route('comments.store', $post->id)}}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label for="content">
+                            Votre commentaire
+                        </label>
+                        <textarea name="content" class="form-control" id="content">
+                    </textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only">
+                            Ajouter ce commentaire
+                        </label>
+                        <input type="submit" value="Ajouter" class="btn btn-primary">
+                    </div>
+                </form>
+            @endauth
+        </section>
     </div>
 @endsection

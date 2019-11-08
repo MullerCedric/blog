@@ -24,6 +24,12 @@ Route::delete('/posts/{post}', 'PostController@destroy')->middleware('can:delete
 
 Route::get('/users/{user}/posts', 'AuthorPostController@index');
 
+Route::post('/comments/{post}', [
+    'as' => 'comments.store',
+    'uses' => 'CommentController@store'
+])->middleware('auth');
+Route::delete('/comments/{comment}', 'CommentController@destroy')->middleware('can:delete,comment');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
