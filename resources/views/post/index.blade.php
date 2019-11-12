@@ -33,6 +33,7 @@
                             <time datetime="{{$post->published_at}}">
                                 {{$post->published_at->diffForHumans()}}
                             </time>
+                            * {{ $post->comments->count() }} {{$post->comments->count() > 1 ? 'commentaires' : 'commentaire'}}
                         </p>
                     </div>
                 </article>
