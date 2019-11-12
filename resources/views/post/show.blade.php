@@ -16,7 +16,7 @@
         <div>
             <h1>{{$post->title}}</h1>
             <p>
-                <time datetime="{{$post->created_at}}">{{$post->created_at->diffForHumans()}}</time>
+                <time datetime="{{$post->published_at}}">{{$post->published_at->diffForHumans()}}</time>
             </p>
             <p>
                 Un post écrit par

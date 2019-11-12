@@ -19,6 +19,8 @@ class CreatePostsTable extends Migration
             $table->string('slug');
             $table->text('content');
             $table->unsignedBigInteger('author_id');
+            $table->timestamp('published_at')->useCurrent();
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('author_id')

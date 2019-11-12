@@ -9,9 +9,9 @@
         @component('components.main-navigation')
         @endcomponent
         @if(isset($user) AND $user)
-            <h1>C'est bon pour ce que tu as - Les articles de {{ $user->name  }}</h1>
+            <h1>C'est bon pour ce que tu as - Les articles de {{ $user->name  }} ({{ $posts->total() }})</h1>
         @else
-            <h1>C'est bon pour ce que tu as - Les articles</h1>
+            <h1>C'est bon pour ce que tu as - Les articles ({{ $posts->total() }})</h1>
         @endif
         <div>
             @foreach($posts as $post)
@@ -23,16 +23,18 @@
                         @endcan
                     </div>
                     <div>{{$post->content}}</div>
-                    @if(!isset($user) OR !$user )
-                        <div>
-                            <p>
+                    <div>
+                        <p>@if(!isset($user) OR !$user )
                                 Un post écrit par
                                 <a href="/users/{{$post->author_id}}/posts">
                                     {{$post->author->name}}
-                                </a>, <time datetime="{{$post->created_at}}">{{$post->created_at->diffForHumans()}}</time>
-                            </p>
-                        </div>
-                    @endif
+                                </a>,
+                            @endif
+                            <time datetime="{{$post->published_at}}">
+                                {{$post->published_at->diffForHumans()}}
+                            </time>
+                        </p>
+                    </div>
                 </article>
             @endforeach
         </div>

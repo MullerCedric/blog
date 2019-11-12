@@ -11,7 +11,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::paginate(10);
+        $posts = Post::orderBy('published_at', 'desc')->paginate(10);
         return view('post.index', ['posts' => $posts]);
     }
 
@@ -25,6 +25,7 @@ class PostController extends Controller
         $post = new Post();
         $post->slug = Str::slug(request('title'), '-');
         $post->title = request('title');
+        $post->published_at = request('published_at_date') . ' ' . request('published_at_time') . ':00';
         $post->content = request('content');
         auth()->user()->posts()->save($post);
 

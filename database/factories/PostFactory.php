@@ -1,6 +1,7 @@
 <?php
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+
 use App\Post;
 use App\User;
 use Faker\Generator as Faker;
@@ -13,6 +14,7 @@ $factory->define(Post::class, function (Faker $faker) {
         'title' => $title,
         'slug' => $slug,
         'content' => $faker->paragraphs(3, true),
-        'author_id' => rand(0,2) > 1 ? User::first()->id : User::latest('id')->first()->id,
+        'published_at' => $faker->dateTimeBetween('-3 years', '3 months'),
+        'author_id' => rand(0, 2) > 1 ? User::first()->id : User::latest('id')->first()->id,
     ];
 });
