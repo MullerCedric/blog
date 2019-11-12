@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Scopes\PublishedScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -16,9 +17,10 @@ class Post extends Model
 
     protected $guarded = [];
 
-    public function scopePublished($query)
+    protected static function boot()
     {
-        return $query->where('published_at', '<', NOW())->orWhere('author_id', '=', auth()->id());
+        parent::boot();
+        static::addGlobalScope(new PublishedScope());
     }
 
     public function author()

@@ -11,8 +11,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::published()
-            ->with('author')
+        $posts = Post::with('author')
             ->orderBy('published_at', 'desc')
             ->paginate(10);
         return view('post.index', ['posts' => $posts]);
@@ -37,7 +36,7 @@ class PostController extends Controller
 
     public function show($id)
     {
-        $post = Post::published()->with('comments')->findOrFail($id);
+        $post = Post::with('comments')->findOrFail($id);
         return view('post.show', compact('post'));
     }
 
