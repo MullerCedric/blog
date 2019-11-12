@@ -21,9 +21,11 @@
             <div class="form-group">
                 <p>Quand souhaitez-vous publier cet article</p>
                 <label for="published_at_date">Date</label>
-                <input type="date" name="published_at_date" id="published_at_date" class="form-control">
+                <input type="date" name="published_at_date" id="published_at_date" class="form-control"
+                       value="{{$post->published_at->format('Y-m-d')}}">
                 <label for="published_at_time">Heures</label>
-                <input type="time" name="published_at_time" id="published_at_time" class="form-control">
+                <input type="time" name="published_at_time" id="published_at_time" class="form-control"
+                       value="{{$post->published_at->format('h:i')}}">
             </div>
             <div class="form-group">
                 <label for="body">Contenu</label>

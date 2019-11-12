@@ -48,6 +48,7 @@ class PostController extends Controller
     public function update(Post $post)
     {
         $post->title = request('title');
+        $post->published_at = request('published_at_date') . ' ' . request('published_at_time') . ':00';
         $post->content = request('content');
         $post->save();
         return redirect('/posts/' . $post->id);
