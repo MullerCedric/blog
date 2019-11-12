@@ -27,9 +27,7 @@
             </div>
             <div class="form-group">
                 <label for="body">Contenu</label>
-                <textarea name="content" id="body" class="form-control">
-                    {{$post->content}}
-                </textarea>
+                <textarea name="content" id="body" class="form-control">{{$post->content}}</textarea>
             </div>
             <input type="submit" value="Enregistrer" class="btn btn-primary">
         </form>

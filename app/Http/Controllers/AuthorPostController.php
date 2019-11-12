@@ -10,11 +10,8 @@ class AuthorPostController extends Controller
 {
     public function index(User $user)
     {
-        if ($user->id == auth()->id()) {
-            $posts = Post::withoutGlobalScope('published')->where('author_id', $user->id)->orderByDesc('published_at')->paginate(5);
-        } else {
-            $posts = $user->posts()->orderByDesc('published_at')->paginate(5);
-        }
+        // $posts = Post::published()->where('author_id', $user->id)->orderByDesc('published_at')->paginate(5);
+        $posts = $user->posts()->published()->orderByDesc('published_at')->paginate(5);
         return view('post.index', compact('user', 'posts'));
     }
 }

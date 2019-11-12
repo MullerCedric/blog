@@ -11,7 +11,10 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::orderBy('published_at', 'desc')->paginate(10);
+        $posts = Post::published()
+            ->with('author')
+            ->orderBy('published_at', 'desc')
+            ->paginate(10);
         return view('post.index', ['posts' => $posts]);
     }
 
@@ -32,10 +35,10 @@ class PostController extends Controller
         return redirect('/');
     }
 
-    public function show(Post $post)
+    public function show($id)
     {
-        $comments = $post->comments;
-        return view('post.show', compact('post', 'comments'));
+        $post = Post::published()->with('comments')->findOrFail($id);
+        return view('post.show', compact('post'));
     }
 
     public function edit(Post $post)

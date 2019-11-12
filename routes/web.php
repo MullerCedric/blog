@@ -15,8 +15,8 @@ Route::view('/about', 'about')->name('about');
 Route::view('/contact', 'contact')->name('contact');
 
 Route::get('/', 'PostController@index')->name('landing');
-Route::get('/posts/create', 'PostController@create')->middleware('auth');
-Route::post('/posts', 'PostController@store')->middleware('auth');
+Route::get('/posts/create', 'PostController@create')->middleware('can:create,App\Post');
+Route::post('/posts', 'PostController@store')->middleware('can:create,App\Post');
 Route::get('/posts/{post}', 'PostController@show');
 Route::get('/posts/{post}/edit', 'PostController@edit')->middleware('can:update,post');
 Route::put('/posts/{post}', 'PostController@update')->middleware('can:update,post');

@@ -43,9 +43,9 @@
         @endcan
         <section>
             <h2>Commentaires</h2>
-            @if($comments && !$comments->isEmpty())
+            @if($post->comments && !$post->comments->isEmpty())
                 <ul class="list-group list-group-flush">
-                    @foreach($comments as $key => $comment)
+                    @foreach($post->comments as $key => $comment)
                         <li class="list-group-item">
                             <p>Commentaire par {{$comment->author->name}}</p>
                             {{$comment->content}}

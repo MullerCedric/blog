@@ -16,16 +16,13 @@ class Post extends Model
 
     protected $guarded = [];
 
-    protected static function boot()
+    public function scopePublished($query)
     {
-        parent::boot();
-
-        static::addGlobalScope('published', function (Builder $builder) {
-            $builder->where('published_at', '<', NOW());
-        });
+        return $query->where('published_at', '<', NOW())->orWhere('author_id', '=', auth()->id());
     }
 
-    public function author() {
+    public function author()
+    {
         return $this->belongsTo('App\User');
     }
 

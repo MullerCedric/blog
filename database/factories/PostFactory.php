@@ -14,7 +14,7 @@ $factory->define(Post::class, function (Faker $faker) {
         'title' => $title,
         'slug' => $slug,
         'content' => $faker->paragraphs(3, true),
-        'published_at' => $faker->dateTimeBetween('-3 years', '3 months'),
+        'published_at' => $faker->dateTimeBetween('-1 year', '5 months'),
         'author_id' => rand(0, 2) > 1 ? User::first()->id : User::latest('id')->first()->id,
     ];
 });

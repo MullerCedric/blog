@@ -41,7 +41,7 @@ class PostPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->is_author || $user->is_admin;
     }
 
     /**
@@ -53,7 +53,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        return $user->id == $post->author_id || $user->isAdmin;
+        return $user->id == $post->author_id || $user->is_admin;
     }
 
     /**
@@ -65,7 +65,7 @@ class PostPolicy
      */
     public function delete(User $user, Post $post)
     {
-        return $user->id == $post->author_id || $user->isAdmin;
+        return $user->id == $post->author_id || $user->is_admin;
     }
 
     /**
