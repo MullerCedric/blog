@@ -6,8 +6,6 @@
 
 @section('content')
     <div class="container">
-        @component('components.main-navigation')
-        @endcomponent
         <h1>Modification de l'article {{$post->title}}</h1>
 
         <form method="POST" action="/posts/{{$post->id}}">

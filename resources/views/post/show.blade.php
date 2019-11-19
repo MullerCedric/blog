@@ -11,8 +11,6 @@
 
 @section('content')
     <div class="container">
-        @component('components.main-navigation')
-        @endcomponent
         <div>
             <h1>{{$post->title}}</h1>
             <p>

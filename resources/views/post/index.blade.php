@@ -6,8 +6,6 @@
 
 @section('content')
     <div class="container">
-        @component('components.main-navigation')
-        @endcomponent
         @if(isset($user) AND $user)
             <h1>C'est bon pour ce que tu as - Les articles de {{ $user->name  }} ({{ $posts->total() }})</h1>
         @else

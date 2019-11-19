@@ -6,8 +6,6 @@
 
 @section('content')
     <div class="container">
-        @component('components.main-navigation')
-        @endcomponent
         <h1>Création d'un nouvel article</h1>
         <form method="POST" action="/posts">
             @csrf
