@@ -76,8 +76,11 @@
                         <label for="content">
                             Votre commentaire
                         </label>
-                        <textarea name="content" class="form-control" id="content">
-                    </textarea>
+                        <textarea name="content" id="content"
+                                  class="form-control @error('content') is-invalid @enderror">{{ old('content') }}</textarea>
+                        @error('content')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label class="sr-only">
