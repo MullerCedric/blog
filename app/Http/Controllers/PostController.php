@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostStoreRequest;
 use App\Post;
 use App\User;
 use Illuminate\Http\Request;
@@ -22,12 +23,14 @@ class PostController extends Controller
         return view('post.create');
     }
 
-    public function store()
+    public function store(PostStoreRequest $request)
     {
+        $post_date = request('published_at_date') ?? date('Y-m-d');
+        $post_time = request('published_at_time') ?? (request('published_at_date') ? '00:00' : date('H:i'));
         $post = new Post();
         $post->slug = Str::slug(request('title'), '-');
         $post->title = request('title');
-        $post->published_at = request('published_at_date') . ' ' . request('published_at_time') . ':00';
+        $post->published_at = $post_date . ' ' . $post_time . ':00';
         $post->content = request('content');
         auth()->user()->posts()->save($post);
 
@@ -45,10 +48,12 @@ class PostController extends Controller
         return view('post.edit', compact('post'));
     }
 
-    public function update(Post $post)
+    public function update(PostStoreRequest $request, Post $post)
     {
+        $post_date = request('published_at_date') ?? date('Y-m-d');
+        $post_time = request('published_at_time') ?? (request('published_at_date') ? '00:00' : date('H:i'));
         $post->title = request('title');
-        $post->published_at = request('published_at_date') . ' ' . request('published_at_time') . ':00';
+        $post->published_at = $post_date . ' ' . $post_time . ':00';
         $post->content = request('content');
         $post->save();
         return redirect('/posts/' . $post->id);
