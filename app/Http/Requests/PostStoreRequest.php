@@ -24,7 +24,7 @@ class PostStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
+            'title' => 'required|unique:posts',
             'published_at_date' => 'nullable|date|date_format:Y-m-d',
             'published_at_time' => 'nullable|date_format:H\:i',
             'content' => 'required|min:4'

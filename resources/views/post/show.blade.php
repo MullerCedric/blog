@@ -22,13 +22,13 @@
                     {{$post->author->name}}
                 </a>
                 @can('update', $post)
-                    - <a href="/posts/{{$post->id}}/edit">Modifier</a>
+                    - <a href="/posts/{{$post->slug}}/edit">Modifier</a>
                 @endcan
             </p>
         </div>
         {{$post->content}}
         @can('delete', $post)
-            <form action="/posts/{{$post->id}}" method="POST">
+            <form action="/posts/{{$post->slug}}" method="POST">
                 @csrf
                 @method('DELETE')
                 <div class="form-group">
@@ -70,7 +70,7 @@
                 @endauth
             @endif
             @auth
-                <form action="{{route('comments.store', $post->id)}}" method="POST">
+                <form action="{{route('comments.store', $post->slug)}}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="content">

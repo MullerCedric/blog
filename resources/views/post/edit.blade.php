@@ -8,7 +8,7 @@
     <div class="container">
         <h1>Modification de l'article {{$post->title}}</h1>
 
-        <form method="POST" action="/posts/{{$post->id}}">
+        <form method="POST" action="/posts/{{$post->slug}}">
             @csrf
             @method('PUT')
             <div class="form-group">

@@ -37,9 +37,9 @@ class PostController extends Controller
         return redirect('/');
     }
 
-    public function show($id)
+    public function show(Post $post)
     {
-        $post = Post::with('comments')->findOrFail($id);
+        $post->load('comments');
         return view('post.show', compact('post'));
     }
 
@@ -53,10 +53,11 @@ class PostController extends Controller
         $post_date = request('published_at_date') ?? date('Y-m-d');
         $post_time = request('published_at_time') ?? (request('published_at_date') ? '00:00' : date('H:i'));
         $post->title = request('title');
+        $post->slug = Str::slug(request('title'), '-');
         $post->published_at = $post_date . ' ' . $post_time . ':00';
         $post->content = request('content');
         $post->save();
-        return redirect('/posts/' . $post->id);
+        return redirect('/posts/' . $post->slug);
     }
 
     public function destroy(Post $post)

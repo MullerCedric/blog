@@ -15,9 +15,9 @@
             @foreach($posts as $post)
                 <article>
                     <div>
-                        <h2><a href="/posts/{{$post->id}}">{{$post->title}}</a></h2>
+                        <h2><a href="/posts/{{$post->slug}}">{{$post->title}}</a></h2>
                         @can('update', $post)
-                            <a href="/posts/{{$post->id}}/edit">Modifier</a>
+                            <a href="/posts/{{$post->slug}}/edit">Modifier</a>
                         @endcan
                     </div>
                     <div>{{$post->content}}</div>
