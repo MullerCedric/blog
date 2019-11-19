@@ -32,7 +32,7 @@
                 <label for="published_at_time">Heures</label>
                 <input type="time" name="published_at_time" id="published_at_time"
                        class="form-control @error('published_at_time') is-invalid @enderror"
-                       value="{{ old('published_at_time') ?? $post->published_at->format('h:i') }}">
+                       value="{{ old('published_at_time') ?? $post->published_at->format('H:i') }}">
                 @error('published_at_time')
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
